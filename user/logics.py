@@ -16,7 +16,7 @@ def gen_rand_code(length=6):
 
 def send_sms(mobile):
     '''发送短信验证码'''
-    print('========frsen')
+
     key = 'Vcode-%s' % mobile
 
     # 检查短信发送状态，防止短时间内给用户重复发送短信
@@ -35,7 +35,10 @@ def send_sms(mobile):
         result = response.json()
         print('短信发送状态: %s' % result.get('msg'))
         if result.get('code') == '000000':
+            print(key)
+            print(type(key))
             cache.set(key,vcode,600)  #给客户多预留一些时间
+            print(cache.get(key))
             return True
         else:
             return False
