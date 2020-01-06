@@ -20,3 +20,5 @@ class AuthMiddleware(MiddlewareMixin):
         uid = request.session.get('id')
         if not uid:
             return JsonResponse({'code':stat.LOGIN_REQUIRED,'data':None})
+        else:
+            request.uid = uid

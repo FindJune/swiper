@@ -41,12 +41,21 @@ def submit_vcode(request):
 
 
 def get_profile(request):
-    print('用户 ID',request.session['uid'])
-
-    return JsonResponse({})
+    # 获取个人资料
+    uid = request.session.get('id')
+    if uid:
+        user = User.objects.get(id=uid)
+    else:
+        return JsonResponse({'code':1002,'data':''})
 
 def set_profile(request):
+    # 修改个人资料
+    uid = request.session['id']
+    user = User.objects.get(id=uid)
     return JsonResponse({})
 
 def upload_avatar(request):
+    # 头像上传
+    uid = request.session['id']
+    user = User.objects.get(id=uid)
     return JsonResponse({})
